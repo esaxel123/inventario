@@ -1,0 +1,82 @@
+/* Estilos de la vista de clientes: utiliza las variables de style.css */
+.cliente-body { padding-bottom: 112px; }
+.cliente-header { margin-bottom: 22px; text-align: center; }
+.cliente-header p { color: rgba(255,255,255,.88); margin-top: 5px; }
+.cliente-main { width: min(1240px, calc(100% - 32px)); margin: 0 auto 28px; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(300px, .85fr); gap: 22px; align-items: start; }
+.cliente-panel { min-width: 0; background: var(--blanco); border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,.06); }
+.inventario-panel { border-top: 4px solid var(--unison-azul); }
+.solicitud-panel { border-top: 4px solid var(--unison-dorado); position: sticky; top: 14px; }
+#solicitud-detalle[hidden] { display: none !important; }
+.solicitud-heading-actions { display: flex; align-items: center; gap: 9px; }
+.btn-ver-solicitud { border: 1px solid var(--unison-azul); color: var(--unison-azul); background: var(--blanco); border-radius: 8px; padding: 8px 11px; font: inherit; font-size: .85rem; font-weight: 700; cursor: pointer; }
+.btn-ver-solicitud:hover { background: #EFF6FF; }
+.panel-heading { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-bottom: 16px; }
+.panel-heading h2 { color: var(--unison-azul); font-size: 1.25rem; margin-bottom: 3px; }
+.panel-heading p { color: var(--texto-secundario); font-size: .88rem; }
+.buscador input, .campo-notas + textarea { width: 100%; border: 1px solid var(--borde-suave); border-radius: 8px; padding: 11px 12px; color: var(--texto-principal); background: #F8FAFC; font: inherit; }
+.buscador input { width: min(230px, 38vw); }
+.buscador input:focus, .campo-notas + textarea:focus { outline: 3px solid rgba(0,59,112,.13); border-color: var(--unison-azul); }
+.tabla-scroll { overflow-x: auto; }
+#Inventario { min-width: 680px; }
+#Inventario thead th { font-size: .75rem; padding: 11px 9px; }
+#Inventario tbody td { padding: 10px 9px; font-size: .86rem; vertical-align: middle; }
+#Inventario tbody tr { background: var(--blanco); }
+#Inventario tbody tr:nth-child(even) { background: #F8FAFC; }
+.btn-agregar, .btn-cantidad, .btn-quitar, #enviar-solicitud { border: 0; border-radius: 8px; cursor: pointer; font: inherit; font-weight: 700; }
+.btn-agregar { background: var(--unison-azul); color: white; padding: 8px 11px; white-space: nowrap; }
+.btn-agregar:hover { background: var(--unison-azul-claro); }
+.btn-agregar:disabled { opacity: .45; cursor: not-allowed; }
+.estado { padding: 10px 12px; margin-bottom: 12px; border-radius: 8px; color: var(--unison-azul); background: #EFF6FF; font-size: .9rem; }
+.estado:empty { display: none; }
+.contador { display: grid; place-items: center; min-width: 34px; height: 34px; border-radius: 50%; background: var(--unison-dorado); color: var(--unison-azul-oscuro); font-weight: 800; }
+.lista-solicitud { display: grid; gap: 10px; max-height: 390px; overflow-y: auto; }
+.solicitud-vacia { text-align: center; padding: 30px 12px; color: var(--texto-secundario); }
+.solicitud-vacia span { display: block; color: var(--unison-dorado); font-size: 2rem; }
+.solicitud-vacia strong { display: block; color: var(--unison-azul); margin: 6px 0; }
+.item-solicitud { border: 1px solid #E2E8F0; border-radius: 9px; padding: 12px; display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 8px 12px; align-items: center; }
+.item-solicitud strong { color: var(--unison-azul-oscuro); display: block; overflow-wrap: anywhere; }
+.item-solicitud small { color: var(--texto-secundario); }
+.controles-cantidad { display: flex; align-items: center; gap: 9px; }
+.btn-cantidad { width: 32px; height: 32px; background: #EFF6FF; color: var(--unison-azul); font-size: 1.1rem; }
+.valor-cantidad { min-width: 22px; text-align: center; font-weight: 800; }
+.btn-quitar { grid-column: 1 / -1; justify-self: end; background: transparent; color: var(--error-rojo); padding: 3px 0; font-size: .82rem; }
+.campo-notas { display: block; margin: 17px 0 7px; color: var(--unison-azul-oscuro); font-size: .9rem; font-weight: 700; }
+.campo-notas + textarea { resize: vertical; min-height: 76px; }
+.barra-envio { position: fixed; z-index: 20; bottom: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 13px max(20px, calc((100vw - 1200px)/2)); background: rgba(255,255,255,.97); border-top: 1px solid var(--borde-suave); box-shadow: 0 -5px 20px rgba(0,43,84,.10); backdrop-filter: blur(8px); }
+.barra-envio-info { display: flex; flex-direction: column; min-width: 0; }
+.barra-envio-info strong { color: var(--unison-azul-oscuro); }
+.barra-envio-info span { color: var(--texto-secundario); font-size: .8rem; }
+#enviar-solicitud { padding: 13px 22px; background: var(--unison-azul); color: white; border-bottom: 3px solid var(--unison-dorado); min-width: 175px; }
+#enviar-solicitud:hover:not(:disabled) { background: var(--unison-azul-claro); }
+#enviar-solicitud:disabled { opacity: .5; cursor: not-allowed; }
+.toast { position: fixed; z-index: 30; left: 50%; bottom: 90px; transform: translate(-50%, 12px); width: max-content; max-width: calc(100% - 30px); padding: 11px 16px; border-radius: 9px; background: var(--unison-azul-oscuro); color: white; box-shadow: 0 5px 18px rgba(0,0,0,.2); opacity: 0; pointer-events: none; transition: .2s ease; text-align: center; }
+.toast.visible { opacity: 1; transform: translate(-50%, 0); }
+.inventario-cards { display: none; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+@media (max-width: 850px) {
+  .cliente-main { grid-template-columns: 1fr; }
+  .solicitud-panel { position: static; }
+  .lista-solicitud { max-height: none; }
+}
+@media (max-width: 600px) {
+  .cliente-body { padding-bottom: 104px; }
+  .cliente-header { padding: 18px 14px; margin-bottom: 15px; }
+  .cliente-header h1 { font-size: 1.35rem; }
+  .cliente-main { width: calc(100% - 20px); gap: 14px; }
+  .cliente-panel { padding: 15px 13px; border-radius: 10px; }
+  .panel-heading { align-items: stretch; flex-direction: column; }
+  .solicitud-heading { flex-direction: row; align-items: center; }
+  .solicitud-heading-actions { flex-shrink: 0; }
+  .btn-ver-solicitud { min-height: 42px; }
+  .buscador input { width: 100%; }
+  .tabla-scroll { display: none; }
+  .inventario-cards { display: grid; gap: 10px; }
+  .inventario-card { border: 1px solid #E2E8F0; border-radius: 9px; padding: 12px; background: #fff; }
+  .inventario-card h3 { color: var(--unison-azul-oscuro); font-size: 1rem; margin-bottom: 4px; }
+  .inventario-card p { color: var(--texto-secundario); font-size: .84rem; margin: 3px 0; overflow-wrap: anywhere; }
+  .inventario-card .card-pie { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 10px; }
+  .inventario-card .btn-agregar { padding: 9px 12px; }
+  .barra-envio { padding: 10px; gap: 8px; }
+  .barra-envio-info span { display: none; }
+  #enviar-solicitud { min-width: 0; padding: 12px 14px; font-size: .9rem; }
+}

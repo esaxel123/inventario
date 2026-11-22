@@ -1,0 +1,28 @@
+# Servicio opcional del lector NFC (se levanta aparte, solo cuando el
+# lector fisico esta conectado al servidor por USB).
+#
+# Uso:
+#   docker compose -f compose.yaml -f compose.lector.yaml up -d
+#
+# No va en compose.yaml porque el contenedor no arranca si el
+# dispositivo /dev/ttyUSB0 no existe en el anfitrion, y el resto del
+# sistema (nginx, app, db) debe funcionar aunque el lector no este
+# conectado (por ejemplo, para las practicas 11 y 12).
+
+services:
+  lector:
+    build: ./app
+    container_name: inventario_lector
+    restart: unless-stopped
+    command: ["python", "-u", "main.py"]
+    env_file: .env
+    environment:
+      API_URL: http://app:5000
+      SERIAL_PORT: ${SERIAL_PORT:-/dev/ttyUSB0}
+    devices:
+      - /dev/bus/usb:/dev/bus/usb
+      - /dev/ttyUSB0:/dev/ttyUSB0
+    depends_on:
+      - app
+    networks:
+      - red_interna

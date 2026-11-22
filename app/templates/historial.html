@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Historial — {{ organizacion }}</title>
+</head>
+<body>
+    <header>
+        <h1>Historial de movimientos</h1>
+        <nav class="menu-principal">
+            <a href="/">Inventario</a>
+            <a href="/surtir">Surtir</a>
+            <a href="/historial">Historial</a>
+            <button type="button" onclick="cerrarSesion()">Cerrar sesión</button>
+        </nav>
+    </header>
+    <div class="contenido">
+        <div class="Tabla">
+            <div class="Tabla-titulo">
+                <h2>Quién se llevó cada cosa (últimos 100 movimientos)</h2>
+            </div>
+            <div class="Tabla-contenido">
+                <table id="Historial">
+                    <thead>
+                        <tr>
+                            <th>Fecha y hora</th>
+                            <th>Componente</th>
+                            <th>Empleado</th>
+                            <th>Cantidad</th>
+                            <th>Pedido</th>
+                            <th>Retirado</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <p id="estado-historial" class="estado">Cargando historial…</p>
+        </div>
+    </div>
+    <script src="/static/js/script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            cargarHistorial();
+        });
+    </script>
+</body>
+</html>

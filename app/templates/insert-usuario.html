@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insertar Usuario — {{ organizacion }}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="insertar-body">
+    <header>
+        <nav class="menu-principal">
+            <a href="/">Inventario</a>
+            <a href="/historial">Historial</a>
+            <button type="button" onclick="cerrarSesion()">Cerrar sesión</button>
+        </nav>
+    </header>
+    <div class="Titulo_insertar">
+        <h1>Insertar Usuario</h1>
+    </div>
+    <div class="Formulario_insertar">
+        <form id="form-insertar-usuario">
+            <label for="nombre_usu">Nombre usuario:</label>
+            <input type="text" id="nombre_usu" name="nombre" autocomplete="given-name" required>
+
+            <label for="puesto_usu">Puesto:</label>
+            <input type="text" id="puesto_usu" name="puesto" placeholder="Empleado, Técnico, Supervisor…" value="Empleado">
+
+            <label for="nfc_usu">NFC:</label>
+            <input type="text" id="nfc_usu" name="nfc" placeholder="ID de la tarjeta (opcional)">
+
+            <label for="contrasena_usu">Contraseña:</label>
+            <input type="password" id="contrasena_usu" name="contrasena" minlength="6" required>
+
+            <button type="submit" id="btnInsertar">Insertar Usuario</button>
+            <p id="errorMsg" class="error"></p>
+            <p id="okMsg" class="ok"></p>
+        </form>
+    </div>
+    <script src="/static/js/script.js"></script>
+    <script>
+        document.querySelector("#form-insertar-usuario").addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const errorMsg = document.querySelector("#errorMsg");
+            const okMsg = document.querySelector("#okMsg");
+            errorMsg.textContent = "";
+            okMsg.textContent = "";
+            const payload = {
+                nombre: document.querySelector("#nombre_usu").value.trim(),
+                puesto: document.querySelector("#puesto_usu").value.trim(),
+                nfc_id: document.querySelector("#nfc_usu").value.trim(),
+                contrasena: document.querySelector("#contrasena_usu").value
+            };
+            try {
+                const respuesta = await fetch("/api/empleados", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+                const data = await respuesta.json();
+                if (!respuesta.ok) {
+                    errorMsg.textContent = data.error || "No se pudo crear el usuario.";
+                    return;
+                }
+                okMsg.textContent = data.mensaje + " (ID " + data.id_empleado + ")";
+                event.target.reset();
+            } catch (error) {
+                errorMsg.textContent = "Error al conectar con el servidor.";
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#002B54">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" href="/static/css/cliente.css">
+  <title>Solicitud de componentes — {{ organizacion }}</title>
+</head>
+<body class="cliente-body">
+  <header class="cliente-header">
+    <h1>Bienvenido <span id="user"></span></h1>
+    <p>Selecciona los componentes y las cantidades que necesitas</p>
+    <nav class="menu-principal">
+      <a href="/">Inventario</a>
+      <a href="/pedir">Pedir componentes</a>
+      <a href="/cambiar-contrasena">Cambiar contraseña</a>
+      <button type="button" onclick="cerrarSesion()">Cerrar sesión</button>
+    </nav>
+  </header>
+
+  <main class="cliente-main">
+    <section class="cliente-panel inventario-panel" aria-labelledby="titulo-inventario">
+      <div class="panel-heading">
+        <div>
+          <h2 id="titulo-inventario">Componentes disponibles</h2>
+          <p>Agrega artículos a tu solicitud con el botón correspondiente.</p>
+        </div>
+        <label class="buscador">
+          <span class="sr-only">Buscar componente</span>
+          <input id="buscar-componente" type="search" placeholder="Buscar componente..." autocomplete="off">
+        </label>
+      </div>
+
+      <div id="estado-inventario" class="estado" role="status">Cargando inventario…</div>
+      <div class="tabla-scroll">
+        <table id="Inventario">
+          <thead>
+            <tr>
+              <th>ID Inventario</th>
+              <th>Componente</th>
+              <th>Categoría</th>
+              <th>Disponible</th>
+              <th>Ubicación</th>
+              <th>Precio</th>
+              <th><span class="sr-only">Acción</span></th>
+            </tr>
+          </thead>
+          <tbody id="inventario-body"></tbody>
+        </table>
+      </div>
+      <div id="inventario-movil" class="inventario-cards" aria-live="polite"></div>
+    </section>
+
+    <section class="cliente-panel solicitud-panel" aria-labelledby="titulo-solicitud">
+      <div class="panel-heading solicitud-heading">
+        <div>
+          <h2 id="titulo-solicitud">Mi solicitud</h2>
+          <p id="resumen-seleccion">Aún no has agregado componentes.</p>
+        </div>
+        <div class="solicitud-heading-actions">
+          <span class="contador" id="contador-items">0</span>
+          <button id="toggle-solicitud" class="btn-ver-solicitud" type="button" aria-expanded="false" aria-controls="solicitud-detalle">Ver lista</button>
+        </div>
+      </div>
+      <div id="solicitud-detalle" hidden>
+      <div id="lista-solicitud" class="lista-solicitud">
+        <div class="solicitud-vacia">
+          <span aria-hidden="true">＋</span>
+          <strong>Tu lista está vacía</strong>
+          <p>Agrega componentes desde el inventario.</p>
+        </div>
+      </div>
+      <label class="campo-notas" for="notas-solicitud">Comentarios (opcional)</label>
+      <textarea id="notas-solicitud" rows="3" placeholder="Indica detalles adicionales de tu solicitud…"></textarea>
+      </div>
+    </section>
+  </main>
+
+  <div class="barra-envio">
+    <div class="barra-envio-info">
+      <strong id="barra-cantidad">0 componentes</strong>
+      <span>Revisa tu selección antes de enviar</span>
+    </div>
+    <button id="enviar-solicitud" type="button" disabled>Revisar solicitud</button>
+  </div>
+
+  <div id="mensaje" class="toast" role="status" aria-live="polite"></div>
+  <script src="/static/js/script.js"></script>
+  <script src="/static/js/cliente.js"></script>
+</body>
+</html>

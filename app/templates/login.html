@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login — {{ organizacion }}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="login-body">
+    <div class="login-box">
+        <div class="login-brand">{{ organizacion }}</div>
+        <h2 class="login-heading">Login</h2>
+        <form id="login-form">
+            <label for="username" id="username-label">Nombre:</label>
+            <input type="text" id="username-input" name="username" required>
+
+            <label for="password" id="password-label">Contraseña:</label>
+            <input type="password" id="password-input" name="password" required>
+
+            <button type="submit" id="login-button">Entrar</button>
+            <p id="errorMsg" class="error"></p>
+        </form>
+        <p class="login-ayuda">Usuario inicial: Jimmy, contraseña temporal Temporal123 (cámbiala al entrar).</p>
+    </div>
+    <script>
+        document.querySelector("#login-form").addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const nombre = document.querySelector("#username-input").value.trim();
+            const contrasena = document.querySelector("#password-input").value;
+            const errorMsg = document.querySelector("#errorMsg");
+            errorMsg.textContent = "";
+            try {
+                const respuesta = await fetch("/api/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ nombre, contrasena })
+                });
+                const data = await respuesta.json();
+                if (!respuesta.ok) {
+                    errorMsg.textContent = data.error || "No se pudo iniciar sesión.";
+                    return;
+                }
+                window.location.href = "/";
+            } catch (error) {
+                errorMsg.textContent = "Error al conectar con el servidor.";
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/static/css/style.css">
+	<title>Componentes — {{ organizacion }}</title>
+</head>
+<body>
+	<header>
+		<h1>{{ organizacion }}</h1>
+		<nav class="menu-principal">
+			<a href="/">Inventario</a>
+			<a href="/pedir">Pedir componentes</a>
+			{% if es_supervisor %}
+			<a href="/surtir">Surtir</a>
+			<a href="/historial">Historial</a>
+			<a href="/empleados/nuevo">Nuevo empleado</a>
+			<a href="/componentes/nuevo">Nuevo componente</a>
+			{% endif %}
+			<span class="usuario-actual">{{ empleado.nombre }} ({{ empleado.puesto or "Empleado" }})</span>
+			<a href="/cambiar-contrasena">Cambiar contraseña</a>
+			<button type="button" onclick="cerrarSesion()">Cerrar sesión</button>
+		</nav>
+	</header>
+
+	<div class="contenido">
+		<div class="Tabla">
+			<div class="Tabla-titulo">
+				<h2 id="inventario-titulo">Inventario</h2>
+			</div>
+
+			<div class="Tabla-contenido">
+			<table id="Inventario">
+				<thead>
+					<tr>
+						<th class="id-inventario">ID Inventario</th>
+						<th class="componente">Componente</th>
+						<th class="descripcion">Categoría</th>
+						<th class="cantidad">Cantidad</th>
+						<th class="ubicacion">Ubicación</th>
+						<th class="precio">Precio</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+			</div>
+			<p id="estado-inventario" class="estado">Cargando inventario…</p>
+		</div>
+		<div class="peticiones">
+			<div class="notificaciones-titulo">
+				<h2 id="notificaciones">Peticiones pendientes</h2>
+			</div>
+			<div class="notificaciones" id="lista-peticiones">
+				<p>Cargando peticiones...</p>
+			</div>
+		</div>
+	</div>
+
+	{% if es_supervisor %}
+	<div class="formulario">
+		<h2>Agregar Componente</h2>
+		<form id="for-Inventario">
+			<label for="componente">Componente:</label>
+			<input type="text" id="componente" name="componente" required>
+
+			<label for="categoria">Categoría:</label>
+			<input type="text" id="categoria" name="categoria" placeholder="Resistencia, Capacitor, Sensor…">
+
+			<label for="descripcion">Descripción:</label>
+			<input type="text" id="descripcion" name="descripcion">
+
+			<label for="cantidad">Cantidad:</label>
+			<input type="number" id="cantidad" name="cantidad" min="0" step="1" value="0" required>
+
+			<label for="ubicacion">Ubicación:</label>
+			<input type="text" id="ubicacion" name="ubicacion" placeholder="A1" required>
+
+			<label for="precio">Precio:</label>
+			<input type="number" id="precio" name="precio" step="0.01" min="0" placeholder="0.00">
+
+			<button type="submit">Agregar</button>
+			<p id="errorMsg" class="error"></p>
+			<p id="okMsg" class="ok"></p>
+		</form>
+	</div>
+	{% endif %}
+
+	<!-- Modal de resultado NFC -->
+	<div id="modal-nfc" class="modal-fondo" onclick="cerrarModalNfc()">
+		<div id="modal-nfc-caja" class="modal-caja" role="dialog" aria-modal="true"
+			aria-labelledby="modal-nfc-titulo" onclick="event.stopPropagation()">
+			<h2 id="modal-nfc-titulo"></h2>
+			<div id="modal-nfc-cuerpo"></div>
+			<button type="button" class="modal-boton" onclick="cerrarModalNfc()">Cerrar</button>
+		</div>
+	</div>
+
+	<script src="/static/js/script.js"></script>
+	<script>
+		async function verificarEmpleado() {
+			try {
+				const respuesta = await fetch("/api/me");
+				if (!respuesta.ok) {
+					window.location.href = "/login";
+					return;
+				}
+				fillTable();
+			} catch (error) {
+				window.location.href = "/login";
+			}
+		}
+
+		document.addEventListener("DOMContentLoaded", () => {
+			verificarEmpleado();
+
+			cargarPeticiones();
+			setInterval(cargarPeticiones, 5000);
+
+			consultarEventosNfc();
+			setInterval(consultarEventosNfc, 2000);
+		});
+	</script>
+</body>
+</html>

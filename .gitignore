@@ -1,0 +1,11 @@
+# Credenciales reales (la Practica 11 exige que .env NO se versione).
+.env
+# Respaldo viejo del proyecto anterior (los respaldos viven fuera del repo).
+database_ct/
+# Basura de Python.
+__pycache__/
+*.pyc
+.venv/
+venv/
+# Sistema.
+.DS_Store

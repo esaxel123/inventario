@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Insertar Componente — {{ organizacion }}</title>
+</head>
+<body class="insertar-comp-body">
+    <header>
+        <nav class="menu-principal">
+            <a href="/">Inventario</a>
+            <a href="/surtir">Surtir</a>
+            <button type="button" onclick="cerrarSesion()">Cerrar sesión</button>
+        </nav>
+    </header>
+    <div class="Titulo_insertar_componente">
+        <h1>Insertar Componente</h1>
+    </div>
+    <div class="Formulario_insertar_componente">
+        <form id="form-insertar-componente">
+            <label for="nombre_comp">Nombre componente:</label>
+            <input type="text" id="nombre_comp" name="nombre" required>
+
+            <label for="categoria_comp">Categoría:</label>
+            <input type="text" id="categoria_comp" name="categoria" placeholder="Resistencia, Capacitor, Sensor…">
+
+            <label for="descripcion_comp">Descripción:</label>
+            <input type="text" id="descripcion_comp" name="descripcion">
+
+            <label for="cantidad_comp">Cantidad:</label>
+            <input type="number" id="cantidad_comp" name="cantidad" min="0" step="1" value="0" required>
+
+            <label for="ubicacion_comp">Ubicación:</label>
+            <input type="text" id="ubicacion_comp" name="ubicacion" placeholder="A1" required>
+
+            <label for="precio_comp">Precio:</label>
+            <input type="number" id="precio_comp" name="precio" step="0.01" min="0" placeholder="0.00">
+
+            <button type="submit" id="btnInsertarComponente">Insertar Componente</button>
+            <p id="errorMsg" class="error"></p>
+            <p id="okMsg" class="ok"></p>
+        </form>
+    </div>
+    <script src="/static/js/script.js"></script>
+    <script>
+        document.querySelector("#form-insertar-componente").addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const errorMsg = document.querySelector("#errorMsg");
+            const okMsg = document.querySelector("#okMsg");
+            errorMsg.textContent = "";
+            okMsg.textContent = "";
+            const payload = {
+                nombre: document.querySelector("#nombre_comp").value.trim(),
+                categoria: document.querySelector("#categoria_comp").value.trim(),
+                descripcion: document.querySelector("#descripcion_comp").value.trim(),
+                cantidad: Number(document.querySelector("#cantidad_comp").value),
+                ubicacion: document.querySelector("#ubicacion_comp").value.trim(),
+                precio: document.querySelector("#precio_comp").value || null
+            };
+            try {
+                const respuesta = await fetch("/api/componentes", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+                const data = await respuesta.json();
+                if (!respuesta.ok) {
+                    errorMsg.textContent = data.error || "No se pudo crear el componente.";
+                    return;
+                }
+                okMsg.textContent = data.mensaje + " (ID " + data.id_componente + ")";
+                event.target.reset();
+            } catch (error) {
+                errorMsg.textContent = "Error al conectar con el servidor.";
+            }
+        });
+    </script>
+</body>
+</html>

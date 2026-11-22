@@ -1,0 +1,758 @@
+/* =========================================
+   Paleta Institucional Universidad de Sonora
+   ========================================= */
+:root {
+    --unison-azul-oscuro: #002B54;
+    --unison-azul: #003B70;
+    --unison-azul-claro: #005596;
+    --unison-dorado: #F2A900;
+    --unison-dorado-hover: #D99600;
+    --fondo-pagina: #F4F6F9;
+    --blanco: #FFFFFF;
+    --texto-principal: #1E293B;
+    --texto-secundario: #64748B;
+    --borde-suave: #CBD5E1;
+    --error-rojo: #DC2626;
+}
+
+/* =========================================
+   Estilos Generales
+   ========================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--fondo-pagina);
+    color: var(--texto-principal);
+    line-height: 1.5;
+    padding-bottom: 40px;
+}
+
+/* Encabezado Institucional */
+header {
+    background: linear-gradient(135deg, var(--unison-azul-oscuro) 0%, var(--unison-azul) 100%);
+    padding: 22px 20px;
+    border-bottom: 5px solid var(--unison-dorado);
+    box-shadow: 0 4px 10px rgba(0, 43, 84, 0.15);
+    margin-bottom: 28px;
+}
+
+h1 {
+    text-align: center;
+    color: var(--blanco);
+    font-size: 1.9rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* =========================================
+   Layout Principal (Conservado y mejorado)
+   ========================================= */
+.contenido {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: 24px;
+    max-width: 1280px;
+    margin: 0 auto 28px auto;
+    padding: 0 20px;
+}
+
+.Tabla {
+    min-width: 0;
+    grid-column: 1;
+    max-height: 480px;
+    background-color: var(--blanco);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    border-top: 4px solid var(--unison-azul);
+}
+
+.Tabla-contenido {
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+.peticiones {
+    grid-column: 2;
+    max-height: 450px;
+    text-align: center;
+    background-color: var(--blanco);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    border-top: 4px solid var(--unison-dorado);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* =========================================
+   Tabla de Inventario
+   ========================================= */
+
+table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: 1px solid var(--borde-suave);
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    max-height: 400px;
+}
+
+.Tabla table {
+    max-width: 100%;
+}
+
+#inventario-titulo {
+    background-color: var(--blanco);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--unison-azul);
+    margin-bottom: 14px;
+    text-align: center;
+    border: none;
+    padding: 0 0 8px 0;
+    border-bottom: 2px solid var(--unison-dorado);
+}
+
+thead th {
+    background-color: var(--unison-azul);
+    color: var(--blanco);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.82rem;
+    letter-spacing: 0.5px;
+    padding: 12px 10px;
+    border: 1px solid var(--unison-azul-claro);
+    text-align: left;
+    white-space: normal;
+    word-break: break-word;
+}
+
+tbody td {
+    border: 1px solid #E2E8F0;
+    padding: 10px;
+    font-size: 0.92rem;
+    color: var(--texto-principal);
+    white-space: normal;
+    word-break: break-word;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #F8FAFC;
+}
+
+tbody tr:hover {
+    background-color: #EFF6FF;
+    transition: background-color 0.2s ease;
+}
+
+/* Proporciones de columnas conservadas */
+.id-inventario {
+    width: 15%;
+    min-width: 15%;
+}
+
+.componente {
+    width: 20%;
+    min-width: 20%;
+}
+
+.descripcion {
+    width: 25%;
+    min-width: 25%;
+}
+
+.cantidad {
+    width: 15%;
+    min-width: 15%;
+    text-align: center;
+}
+
+.ubicacion {
+    width: 15%;
+    min-width: 15%;
+}
+
+.precio {
+    width: 10%;
+    min-width: 10%;
+}
+
+/* =========================================
+   Sección de Peticiones / Notificaciones
+   ========================================= */
+
+.notificaciones {
+    overflow-y: auto;
+    max-height: 400px;
+}
+
+.notificaciones-titulo h2 {
+    color: var(--unison-azul);
+    font-size: 1.3rem;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--unison-dorado);
+    margin-bottom: 4px;
+}
+
+.peticiones section {
+    background-color: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-left: 5px solid var(--unison-azul);
+    border-radius: 6px;
+    padding: 16px;
+    font-weight: 600;
+    color: var(--unison-azul-oscuro);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+    transition: transform 0.2s ease, border-left-color 0.2s ease;
+}
+
+.peticiones section:hover {
+    transform: translateY(-2px);
+    border-left-color: var(--unison-dorado);
+}
+
+/* =========================================
+   Formulario Agregar Componente
+   ========================================= */
+.formulario {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 24px 28px;
+    background-color: var(--blanco);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    border-top: 4px solid var(--unison-azul);
+}
+
+@media (min-width: 761px) {
+    .formulario {
+        margin: 0 20px;
+        max-width: 1240px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .formulario {
+        margin: 0 auto;
+    }
+}
+
+.formulario h2 {
+    color: var(--unison-azul);
+    font-size: 1.35rem;
+    margin-bottom: 18px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--unison-dorado);
+}
+
+#for-Inventario input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--borde-suave);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    background-color: #F8FAFC;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+#for-Inventario input:focus {
+    outline: none;
+    border-color: var(--unison-azul);
+    background-color: var(--blanco);
+    box-shadow: 0 0 0 3px rgba(0, 59, 112, 0.15);
+}
+
+#for-Inventario button {
+    background-color: var(--unison-azul);
+    color: var(--blanco);
+    border: none;
+    border-bottom: 3px solid var(--unison-dorado);
+    padding: 11px 22px;
+    font-size: 0.98rem;
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+    letter-spacing: 0.4px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    margin-top: 6px;
+}
+
+#for-Inventario button:hover {
+    background-color: var(--unison-azul-claro);
+}
+
+#for-Inventario button:active {
+    transform: scale(0.98);
+}
+
+.error {
+    grid-column: 1 / -1;
+    color: var(--error-rojo);
+    font-size: 0.9rem;
+    font-weight: 600;
+    min-height: 20px;
+}
+
+/* =========================================
+   Responsividad
+   ========================================= */
+@media (max-width: 760px) {
+    .contenido {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .Tabla,
+    .peticiones {
+        grid-column: 1;
+    }
+
+    .formulario {
+        margin: 0 20px;
+    }
+}
+
+/* =========================================
+   Login Page Styles
+   ========================================= */
+
+:root {
+    --unison-blue: #005ca8;
+    --unison-blue-dark: #062c5a;
+    --unison-gold: #f5c65a;
+    --unison-light: #edf5ff;
+    --white: #ffffff;
+    --text: #1f2a37;
+    --muted: #5f6d7c;
+    --border: rgba(0, 92, 168, 0.18);
+    --shadow: 0 18px 40px rgba(6, 44, 90, 0.18);
+}
+
+body.login-body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, var(--unison-light) 0%, #dfeeff 100%);
+    color: var(--text);
+}
+
+.login-box {
+    width: min(100%, 420px);
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid var(--border);
+    border-top: 5px solid var(--unison-gold);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    padding: 2.2rem 2rem;
+    backdrop-filter: blur(6px);
+}
+
+.login-brand {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--unison-blue) 0%, var(--unison-blue-dark) 100%);
+    color: var(--white);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12rem;
+    padding: 0.55rem 0.9rem;
+    border-radius: 999px;
+    margin-bottom: 1.2rem;
+}
+
+h2.login-heading {
+    margin: 0 0 1.5rem;
+    color: var(--unison-blue-dark);
+    font-size: 2rem;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--unison-blue-dark);
+}
+
+input#username-input,
+input#password-input {
+    width: 100%;
+    padding: 0.9rem 0.95rem;
+    border: 1px solid #c9d7eb;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    background: #f9fbff;
+}
+
+input#username-input:focus,
+input#password-input:focus {
+    border-color: var(--unison-blue);
+    box-shadow: 0 0 0 4px rgba(0, 92, 168, 0.12);
+    background: var(--white);
+}
+
+button#login-button {
+    margin-top: 0.5rem;
+    border: none;
+    border-radius: 10px;
+    padding: 0.95rem 1.2rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white);
+    background: linear-gradient(135deg, var(--unison-blue) 0%, var(--unison-blue-dark) 100%);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 10px 20px rgba(0, 92, 168, 0.25);
+}
+
+button#login-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px rgba(0, 92, 168, 0.3);
+}
+
+button#login-button:active {
+    transform: translateY(0);
+}
+
+/* ---------- Modal de resultado NFC ---------- */
+.modal-fondo {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-fondo.abierto {
+    display: flex;
+}
+
+.modal-caja {
+    background: #fff;
+    color: #222;
+    width: 90%;
+    max-width: 420px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 24px;
+    border-radius: 10px;
+    border-top: 8px solid #888;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.modal-caja h2 {
+    margin-top: 0;
+    color: #222;
+}
+
+.modal-caja ul {
+    padding-left: 20px;
+}
+
+.modal-caja.exito { border-top-color: #2e9e4f; }
+.modal-caja.aviso { border-top-color: #e0a100; }
+.modal-caja.error { border-top-color: #c62828; }
+
+.modal-boton {
+    margin-top: 16px;
+    padding: 8px 20px;
+    cursor: pointer;
+}
+
+/* ========================================================
+   Insertar Usuario, Insertar componente, Surtir componente
+   ======================================================== */
+
+:root {
+    --insertar-azul-oscuro: #002B54;
+    --insertar-azul: #003B70;
+    --insertar-azul-claro: #005596;
+    --insertar-dorado: #F2A900;
+    --insertar-dorado-hover: #D99600;
+    --insertar-fondo: #F4F6F9;
+    --insertar-blanco: #FFFFFF;
+    --insertar-texto: #1E293B;
+    --insertar-borde: #CBD5E1;
+    --insertar-sombra: 0 18px 40px rgba(0, 43, 84, 0.16);
+}
+
+body.insertar-body,
+body.insertar-comp-body,
+body.body-surtir {
+    min-height: 100vh;
+    margin: 0;
+    display: grid;
+    place-items: center;
+    align-content: center;
+    gap: 24px;
+    padding: 32px 16px;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: var(--insertar-texto);
+    background:
+        linear-gradient(rgba(0, 59, 112, 0.06), rgba(0, 59, 112, 0.06)),
+        var(--insertar-fondo);
+}
+
+.Titulo_insertar,
+.Formulario_insertar,
+.Titulo_insertar_componente,
+.Formulario_insertar_componente,
+.Titulo_surtir_componente,
+.Formulario_surtir_componente {
+    width: min(100%, 560px);
+}
+
+.Titulo_insertar,
+.Titulo_insertar_componente,
+.Titulo_surtir_componente {
+    border-bottom: 5px solid var(--insertar-dorado);
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--insertar-azul-oscuro), var(--insertar-azul));
+    box-shadow: 0 8px 20px rgba(0, 43, 84, 0.18);
+}
+
+.Titulo_insertar h1,
+.Titulo_insertar_componente h1,
+.Titulo_surtir_componente h1 {
+    margin: 0;
+    padding: 18px 24px;
+    color: var(--insertar-blanco);
+    font-size: clamp(24px, 5vw, 34px);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.Formulario_insertar,
+.Formulario_insertar_componente,
+.Formulario_surtir_componente {
+    box-sizing: border-box;
+    padding: 30px;
+    border: 1px solid var(--insertar-borde);
+    border-top: 5px solid var(--insertar-dorado);
+    border-radius: 10px;
+    background: var(--insertar-blanco);
+    box-shadow: var(--insertar-sombra);
+}
+
+.Formulario_insertar form,
+.Formulario_insertar_componente form,
+.Formulario_surtir_componente form {
+    display: grid;
+    gap: 0;
+}
+
+.Formulario_insertar label,
+.Formulario_insertar_componente label,
+.Formulario_surtir_componente label {
+    margin-bottom: 7px;
+    color: var(--insertar-azul-oscuro);
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.Formulario_insertar input,
+.Formulario_insertar_componente input,
+.Formulario_surtir_componente input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 18px;
+    border: 2px solid var(--insertar-borde);
+    border-radius: 6px;
+    background: var(--insertar-blanco);
+    color: var(--insertar-texto);
+    font-size: 16px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.Formulario_insertar input:focus,
+.Formulario_insertar_componente input:focus,
+.Formulario_surtir_componente input:focus {
+    border-color: var(--insertar-azul-claro);
+    box-shadow: 0 0 0 3px rgba(0, 84, 150, 0.12);
+    background: #F8FAFC;
+}
+
+#btnInsertar,
+#btnInsertarComponente,
+#btnAgregarComp {
+    min-height: 48px;
+    margin-top: 4px;
+    border: 0;
+    border-bottom: 3px solid var(--insertar-dorado);
+    border-radius: 6px;
+    background: var(--insertar-azul);
+    color: var(--insertar-blanco);
+    font-size: 16px;
+    font-family: inherit;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+#btnAgregarComp {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+#btnInsertar:hover,
+#btnInsertarComponente:hover,
+#btnAgregarComp:hover {
+    background: var(--insertar-azul-claro);
+    border-bottom-color: var(--insertar-dorado-hover);
+    transform: translateY(-1px);
+}
+
+#btnInsertar:active,
+#btnInsertarComponente:active,
+#btnAgregarComp:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 480px) {
+    body.insertar-body,
+    body.insertar-comp-body {
+        padding: 20px 12px;
+    }
+
+    .Formulario_insertar,
+    .Formulario_insertar_componente {
+        padding: 22px 18px;
+    }
+
+    .Titulo_insertar h1,
+    .Titulo_insertar_componente h1 {
+        padding: 16px;
+        font-size: 24px;
+    }
+}
+
+.body-surtir {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+body.body-surtir {
+    align-items: stretch;
+}
+
+.Titulo_surtir_componente {
+    grid-column: 1 / -1;
+    width: 100%;
+}
+
+.Formulario_surtir_componente,
+.comp_añadidos {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+}
+
+.comp_añadidos {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    padding: 1.5rem;
+    border: 1px solid var(--insertar-borde);
+    border-top: 5px solid var(--insertar-dorado);
+    border-radius: 10px;
+    background: var(--insertar-blanco);
+    box-shadow: var(--insertar-sombra);
+}
+
+.comp_añadidos h2 {
+    margin: 0 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--insertar-dorado);
+    color: var(--insertar-azul-oscuro);
+}
+
+#lista_añadidos {
+    display: grid;
+    flex: 1 1 auto;
+    min-height: 0;
+    gap: 0.75rem;
+    margin: 0 0 1.25rem;
+    padding: 0;
+    list-style: none;
+    overflow-y: auto;
+}
+
+#lista_añadidos li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--insertar-borde);
+    border-left: 4px solid var(--insertar-azul);
+    border-radius: 6px;
+    background: #F8FAFC;
+    color: var(--insertar-texto);
+}
+
+.comp_añadidos button {
+    padding: 0.55rem 0.9rem;
+    border: 0;
+    border-bottom: 3px solid var(--insertar-dorado);
+    border-radius: 6px;
+    background: var(--insertar-azul);
+    color: var(--insertar-blanco);
+    font: 700 16px inherit;
+    cursor: pointer;
+}
+
+.comp_añadidos button:hover:not(:disabled) {
+    background: var(--insertar-azul-claro);
+}
+
+.comp_añadidos button:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+#mensaje_peticion {
+    min-height: 1.5em;
+    margin: 0.75rem 0 0;
+}
+
+@media (max-width: 700px) {
+    .body-surtir {
+        grid-template-columns: 1fr;
+    }
+
+    .Titulo_surtir_componente {
+        grid-column: 1;
+    }
+}
+
+.comp_añadidos {
+    overflow-y: auto;
+    max-height: 400px;
+}
