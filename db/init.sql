@@ -18,6 +18,11 @@
 
 USE inventario_ct;
 
+-- Forzar UTF-8 en la importación: sin esto, el cliente de MySQL puede
+-- leer el archivo como latin1 y los acentos quedan doble codificados
+-- en la base (por ejemplo, 'Batería' se guarda como 'BaterÃ­a').
+SET NAMES utf8mb4;
+
 CREATE TABLE IF NOT EXISTS componentes (
   id_componente INT NOT NULL AUTO_INCREMENT,
   nombre VARCHAR(50) NOT NULL,

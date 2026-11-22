@@ -135,6 +135,10 @@ function cargarPeticiones() {
         })
         .catch(error => {
             console.error("Error al cargar peticiones:", error);
+            const contenedor = document.getElementById("lista-peticiones");
+            if (contenedor) {
+                contenedor.textContent = "No se pudieron cargar las peticiones. Recarga la página.";
+            }
         });
 }
 

@@ -762,29 +762,55 @@ def crear_solicitud():
 
 
 @app.route("/api/peticiones", methods=["GET"])
-@supervisor_requerido
+@login_requerido
 def obtener_peticiones():
+    empleado = empleado_actual()
     conexion = connect()
     cursor = conexion.cursor(dictionary=True)
     try:
-        cursor.execute(
-            """
-            SELECT
-                p.id_pedido,
-                e.nombre AS empleado,
-                p.fecha_hora,
-                p.estado,
-                p.comentarios,
-                c.nombre AS componente,
-                h.cantidad
-            FROM pedidos p
-            INNER JOIN empleados e ON p.id_empleado = e.id_empleado
-            INNER JOIN historial_pedidos h ON p.id_pedido = h.id_pedido
-            INNER JOIN componentes c ON h.id_componente = c.id_componente
-            WHERE p.estado = 'pendiente'
-            ORDER BY p.fecha_hora ASC, p.id_pedido ASC
-            """
-        )
+        # El supervisor ve todas las pendientes; el empleado solo las
+        # suyas. Antes la ruta era solo de supervisor y el panel quedaba
+        # en "Cargando peticiones..." para los empleados (403).
+        if es_supervisor(empleado):
+            cursor.execute(
+                """
+                SELECT
+                    p.id_pedido,
+                    e.nombre AS empleado,
+                    p.fecha_hora,
+                    p.estado,
+                    p.comentarios,
+                    c.nombre AS componente,
+                    h.cantidad
+                FROM pedidos p
+                INNER JOIN empleados e ON p.id_empleado = e.id_empleado
+                INNER JOIN historial_pedidos h ON p.id_pedido = h.id_pedido
+                INNER JOIN componentes c ON h.id_componente = c.id_componente
+                WHERE p.estado = 'pendiente'
+                ORDER BY p.fecha_hora ASC, p.id_pedido ASC
+                """
+            )
+        else:
+            cursor.execute(
+                """
+                SELECT
+                    p.id_pedido,
+                    e.nombre AS empleado,
+                    p.fecha_hora,
+                    p.estado,
+                    p.comentarios,
+                    c.nombre AS componente,
+                    h.cantidad
+                FROM pedidos p
+                INNER JOIN empleados e ON p.id_empleado = e.id_empleado
+                INNER JOIN historial_pedidos h ON p.id_pedido = h.id_pedido
+                INNER JOIN componentes c ON h.id_componente = c.id_componente
+                WHERE p.estado = 'pendiente'
+                  AND p.id_empleado = %s
+                ORDER BY p.fecha_hora ASC, p.id_pedido ASC
+                """,
+                (empleado["id_empleado"],),
+            )
         filas = cursor.fetchall()
         peticiones = {}
         for fila in filas:
